@@ -4,16 +4,16 @@ IN = main.c
 OUT = splitter
 TEST = ./tests/test.splitter
 
-run: |build io
+build: $(IN)
+	$(CC) $(IN) -o $(OUT)
+
+dev: $(IN)
+	$(CC) $(CARGS) $(IN) -o $(OUT)
 
 io: $(OUT)
 	./$(OUT) $(TEST)
 
-build: $(IN)
-	$(CC) $(CARGS) $(IN) -o $(OUT)
-
-exec: $(OUT)
-	./$(OUT)
+test: |build io
 
 clean: $(OUT)
 	rm $(OUT)
