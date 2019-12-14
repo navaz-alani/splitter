@@ -30,6 +30,6 @@ Secondly, a simple parser for the `splitter` syntax was created. The parser can 
 
 The file operations used in the source code are cross-platform compatible and therefore, there should not be many issues with the program.
 
-Features such as being able to switch between exemptions and inclusions in the item definition are to be implemented. 
+Features such as being able to switch between exemptions and inclusions in the item definition are to be implemented. There are also plans to use a program like `yacc` or `bison` to perform the parsing instead.
 
 Collaboration is welcome (and appreciated) through GitHub.

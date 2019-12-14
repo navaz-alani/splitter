@@ -1,5 +1,6 @@
 CC = clang
-CARGS = -fsanitize=address -O1 -fno-omit-frame-pointer -g
+CARGS_DEV = -fsanitize=address -O1 -fno-omit-frame-pointer -g
+CARGS = -fsanitize=address -O1 -fno-omit-frame-pointer
 IN = main.c
 OUT = splitter
 TEST = ./tests/test.splitter
@@ -8,7 +9,7 @@ build: $(IN)
 	$(CC) $(IN) -o $(OUT)
 
 dev: $(IN)
-	$(CC) $(CARGS) $(IN) -o $(OUT)
+	$(CC) $(CARGS_DEV) $(IN) -o $(OUT)
 
 io: $(OUT)
 	./$(OUT) $(TEST)
