@@ -3,11 +3,19 @@ name: C/C++ CI
 on: [push]
 
 jobs:
-  build:
+  build-mac:
 
     runs-on: macos-latest
     
     steps:
     - uses: actions/checkout@v1
     - name: make
-      run: make
+      run: make build-mac
+
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: make
+      run: make build-linux

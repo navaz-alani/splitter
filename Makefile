@@ -1,24 +1,37 @@
 # Compilers & Debuggers
-CC = clang
-LEX = lex
+CC = gcc
+LEX = flex
 DBG = lldb
 
 # Input, Output, Testing files
 LEX_IN = main.l
 OUT = splitter
 TEST = tests/t1
+BUILD_TRASH = lex.yy.c
 
 # Build arguments
 MAC_LIBS = -ll
+LIN_LIBS = -lfl
 NORMAL_BUILD = -O1
 MEM_ANALYSIS_BUILD = -fsanitize=address -fno-omit-frame-pointer
 STEPPER_BUILD = -g
 
 # Targets
-build-mac: $(LEX_IN)
+build-mac: | build-lex mac-compiler-lex clean
+
+build-linux: | build-lex lin-compile-lex clean
+
+mac-compiler-lex: $(BUILD_TRASH)
+	$(CC) $(MAC_LIBS) lex.yy.c -o $(OUT)
+
+lin-compiler-lex: $(BUILD_TRASH)
+	$(CC) $(LIN_LIBS) lex.yy.c -o $(OUT)
+
+build-lex: $(LEX_IN)
 	$(LEX) $(LEX_IN)
-	$(CC) $(MAC_LIBS) $(MEM_ANALYSIS_BUILD) lex.yy.c -o $(OUT)
-	rm lex.yy.c
+
+clean: 
+	rm $(BUILD_TRASH)
 
 # Need to configure tests into a c file for CI
 test-io: $(TEST) $(OUT)
