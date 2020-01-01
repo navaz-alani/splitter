@@ -1,6 +1,6 @@
 # Compilers & Debuggers
 CC = gcc
-LEX = flex
+LEX = lex
 DBG = lldb
 
 # Input, Output, Testing files
