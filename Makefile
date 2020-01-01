@@ -16,14 +16,14 @@ MEM_ANALYSIS_BUILD = -fsanitize=address -fno-omit-frame-pointer
 STEPPER_BUILD = -g
 
 # Targets
-build-mac: | build-lex mac-compiler-lex clean
+build-mac: | build-lex mac-compile-lex clean
 
 build-linux: | build-lex lin-compile-lex clean
 
-mac-compiler-lex: $(BUILD_TRASH)
+mac-compile-lex: $(BUILD_TRASH)
 	$(CC) $(MAC_LIBS) lex.yy.c -o $(OUT)
 
-lin-compiler-lex: $(BUILD_TRASH)
+lin-compile-lex: $(BUILD_TRASH)
 	$(CC) $(LIN_LIBS) lex.yy.c -o $(OUT)
 
 build-lex: $(LEX_IN)
