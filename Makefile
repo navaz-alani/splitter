@@ -12,7 +12,6 @@ BUILD_TRASH = lex.yy.c
 # Build arguments
 MAC_LIBS = -ll
 LIN_LIBS = -lfl
-NORMAL_BUILD = -O1
 MEM_ANALYSIS_BUILD = -fsanitize=address -fno-omit-frame-pointer
 STEPPER_BUILD = -g
 
@@ -32,6 +31,9 @@ build-lex: $(LEX_IN)
 
 clean: 
 	rm $(BUILD_TRASH)
+
+apt-config:
+	sudo apt install flex
 
 # Need to configure tests into a c file for CI
 test-io: $(TEST) $(OUT)

@@ -17,5 +17,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: config
+      run: make apt-config
     - name: make
       run: make build-linux
