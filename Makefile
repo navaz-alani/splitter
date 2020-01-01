@@ -1,20 +1,32 @@
+# Compilers & Debuggers
 CC = clang
-CARGS = -fsanitize=address -O1 -fno-omit-frame-pointer -g
-IN = main.c
+LEX = lex
+DBG = lldb
+
+# Input, Output, Testing files
+LEX_IN = main.l
 OUT = splitter
-TEST = ./tests/test.splitter
+TEST = tests/t1
 
-build: $(IN)
-	$(CC) $(IN) -o $(OUT)
+# Build arguments
+MAC_LIBS = -ll
+NORMAL_BUILD = -O1
+MEM_ANALYSIS_BUILD = -fsanitize=address -fno-omit-frame-pointer
+STEPPER_BUILD = -g
 
-dev: $(IN)
-	$(CC) $(CARGS) $(IN) -o $(OUT)
+# Targets
+build-mac: $(LEX_IN)
+	$(LEX) $(LEX_IN)
+	$(CC) $(MAC_LIBS) $(MEM_ANALYSIS_BUILD) lex.yy.c -o $(OUT)
+	rm lex.yy.c
 
-io: $(OUT)
-	./$(OUT) $(TEST)
+# Need to configure tests into a c file for CI
+test-io: $(TEST) $(OUT)
+	cat $(TEST) | ./$(OUT)
 
-test: |build io
+stepper: $(DEBUGGER) $(OUT)
+	$(DBG) ./$(OUT)
 
-clean: $(OUT)
+clean-debug:
 	rm $(OUT)
-	rm -rf *.dSYM
+	rm -rf $(OUT).dSYM

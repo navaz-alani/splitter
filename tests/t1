@@ -1,0 +1,15 @@
+:targets
+    p1      a
+    p2      b
+    p3      c
+    p4      d
+    p5      e
+:end-targets
+
+# the ':items' declaration can be ommitted as
+# it has no effect since :end-targets already
+# implies that items are expected
+
+:items
+    1000    ca i
+:end-items
